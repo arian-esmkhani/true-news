@@ -1,0 +1,103 @@
+networks:
+  gateway_net:
+    driver: bridge
+  
+  data_net:
+    driver: bridge
+    internal: true 
+  
+services:
+  # ========== MySQL ==========
+  mysql:
+    image: mysql:8.0
+    container_name: news_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DB:my_db}
+      MYSQL_USER: ${MYSQL_USER:my_user}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:my_pass}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root123}
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - data_net
+    expose:
+      - "3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD:-root123}"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+
+  # ========== Redis ==========
+  redis:
+    image: redis:7-alpine
+    container_name: news_redis
+    restart: unless-stopped
+    command: redis-server --requirepass ${REDIS_PASSWORD:-redis123} --appendonly yes
+    volumes:
+      - redis_data:/data
+    networks:
+      - data_net
+    expose:
+      - "6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+
+
+  # ========== Main Service (Spring Boot) ==========
+  main-service:
+    build:
+      context: ./backend/main
+      dockerfile: Dockerfile
+    image: news/main-service:1.0.0
+    container_name: news_main_service
+    restart: unless-stopped
+    environment:
+      # MySQL
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: ${DB_NAME:-gym_db}
+      DB_USER: ${DB_USER:-gym_user}
+      DB_PASS: ${DB_PASSWORD:-gym_pass}
+      # Redis
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-redis123}
+    networks:
+      - data_net
+      - gateway_net
+    expose:
+      - "5002"
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  # ========== Main Frontend (Next.js) ==========
+  main-frontend:
+    build:
+      context: ./frontend/main
+      dockerfile: Dockerfile
+    image: news/main-frontend:1.0.0
+    container_name: news_main_frontend
+    restart: unless-stopped
+    environment:
+      NEXT_PUBLIC_API_URL: "http://main-service:5002"
+      NEXT_PUBLIC_WS_URL: "ws://api-gateway:5002"
+    networks:
+      - gateway_net
+    ports:
+      - "3000:3000"
+    depends_on:
+      api-gateway:
+        condition: service_started
+
+volumes:
+  mysql_data:
+  redis_data:
