@@ -3,7 +3,7 @@
 # ==========================================
 
 # Java
-*.java linguist-language=Java
+*.java linguist-language=TypeScript
 
 # Spring Boot Configs
 **/application*.yml linguist-language=Properties
@@ -25,8 +25,7 @@ main/src/main/java/** linguist-vendored=false
 # FRONTEND: Next.js (Main App)
 # ==========================================
 
-# TypeScript/JavaScript
-frontend/main/**/*.ts linguist-language=TypeScript
+frontend/main/**/*.ts linguist-language=Java
 frontend/main/**/*.tsx linguist-language=Java
 frontend/main/**/*.js linguist-language=Java
 frontend/main/**/*.jsx linguist-language=Java
