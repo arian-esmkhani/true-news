@@ -5,7 +5,7 @@ A complete web application with a Spring Boot backend API and a Next.js frontend
 ## Architecture Overview
 <img src="ar.png" width="770" alt="Architecture">
 
-## 🚀 Tech Stack
+## Tech Stack
 
 ### Backend
 - **Java 21** with Spring Boot
