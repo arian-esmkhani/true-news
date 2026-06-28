@@ -3,7 +3,7 @@
 A complete web application with a Spring Boot backend API and a Next.js frontend, delivering dynamic content including articles, topics, sliders, and categorized titles with caching and async support.
 
 ## Architecture Overview
-<img src="ar.png" width="770" alt="Architecture">
+<img src="ar.png" width="760" alt="Architecture">
 
 ## Tech Stack
 
@@ -12,7 +12,7 @@ A complete web application with a Spring Boot backend API and a Next.js frontend
 - **Spring Data JPA** & **Hibernate**
 - **Spring Cache** with **Redis**
 - **Spring Async** with custom thread pool
-- **PostgreSQL** (assumed, based on JPA usage)
+- **MySQL** (assumed, based on JPA usage)
 - **Maven** (presumed)
 - **Validation** (Hibernate Validator)
 
@@ -20,8 +20,6 @@ A complete web application with a Spring Boot backend API and a Next.js frontend
 - **Next.js** (React framework)
 - **TypeScript**
 - **Tailwind CSS**
-
-
 
 ## Backend Overview
 
