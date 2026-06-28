@@ -16,10 +16,10 @@ pom.xml linguist-language=Maven
 **/pom.xml linguist-language=Maven
 
 # Java
-main/src/main/java/** linguist-vendored=false
+main/src/main/java/** linguist-vendored=true
 
 # Java Resources
-**/src/main/resources/** linguist-vendored=false
+**/src/main/resources/** linguist-vendored=true
 
 # ==========================================
 # FRONTEND: Next.js (Main App)
@@ -27,7 +27,7 @@ main/src/main/java/** linguist-vendored=false
 
 # TypeScript/JavaScript
 frontend/main/**/*.ts linguist-language=TypeScript
-frontend/main/**/*.tsx linguist-language=Java
+frontend/main/**/*.tsx linguist-detectable=false
 frontend/main/**/*.js linguist-language=JavaScript
 frontend/main/**/*.jsx linguist-language=Java
 frontend/main/**/*.css linguist-language=CSS
