@@ -15,12 +15,8 @@
 pom.xml linguist-language=Maven
 **/pom.xml linguist-language=Maven
 
-# Java Services (not vendored)
-api-gateway/src/main/java/** linguist-vendored=false
-auth-service/src/main/java/** linguist-vendored=false
-main-service/src/main/java/** linguist-vendored=false
-admin-service/src/main/java/** linguist-vendored=false
-coach-service/src/main/java/** linguist-vendored=false
+# Java
+main/src/main/java/** linguist-vendored=false
 
 # Java Resources
 **/src/main/resources/** linguist-vendored=false
@@ -37,15 +33,6 @@ frontend/main/**/*.jsx linguist-language=JavaScript
 frontend/main/**/*.css linguist-language=CSS
 frontend/main/**/*.scss linguist-language=SCSS
 
-# ==========================================
-# FRONTEND: Angular (Admin Panel)
-# ==========================================
-
-# TypeScript/HTML/CSS
-frontend/admin/**/*.ts linguist-language=Java
-frontend/admin/**/*.html linguist-language=HTML
-frontend/admin/**/*.css linguist-language=CSS
-frontend/admin/**/*.scss linguist-language=SCSS
 
 # ==========================================
 # DOCKER & INFRASTRUCTURE
