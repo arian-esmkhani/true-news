@@ -16,7 +16,7 @@ pom.xml linguist-language=Maven
 **/pom.xml linguist-language=Maven
 
 # Java
-backend/main/src/main/java/** linguist-vendored=false
+main/src/main/java/** linguist-vendored=false
 
 # Java Resources
 **/src/main/resources/** linguist-vendored=false
