@@ -29,9 +29,9 @@ main/src/main/java/** linguist-vendored=false
 frontend/main/**/*.ts linguist-language=TypeScript
 frontend/main/**/*.tsx linguist-language=Java
 frontend/main/**/*.js linguist-language=Java
-frontend/main/**/*.jsx linguist-language=JavaScript
-frontend/main/**/*.css linguist-language=CSS
-frontend/main/**/*.scss linguist-language=SCSS
+frontend/main/**/*.jsx linguist-language=Java
+frontend/main/**/*.css linguist-language=Java
+frontend/main/**/*.scss linguist-language=Java
 
 
 # ==========================================
